@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kruskal minimum spanning tree — recompute it yourself</title>
+<style>
+:root{color-scheme:dark}
+body{font:15px/1.55 ui-monospace,Menlo,Consolas,monospace;margin:0;background:#0b0e14;color:#c9d4e3;padding:24px}
+main{max-width:980px;margin:0 auto}
+h1{font-size:19px;color:#e8eef7;margin:0 0 4px}
+h2{font-size:15px;color:#8ab4f8;margin:28px 0 8px}
+p{margin:8px 0}
+a{color:#8ab4f8}
+code,pre{background:#11151f;border:1px solid #232a3a;border-radius:6px}
+code{padding:1px 5px}
+pre{padding:12px;overflow:auto}
+textarea,input,select,button{font:inherit;background:#11151f;color:#c9d4e3;border:1px solid #2a3347;border-radius:6px;padding:6px 10px}
+textarea{width:100%;min-height:150px}
+button{background:#1d2a44;border-color:#33507e;cursor:pointer;font-weight:600}
+button:hover{background:#24365c}
+.small{color:#778397;font-size:13px}
+.ok{color:#68d391;font-weight:700}
+.bad{color:#fc8181;font-weight:700}
+table{border-collapse:collapse;margin:10px 0}
+td,th{border:1px solid #232a3a;padding:4px 10px;text-align:left}
+.panel{background:#11151f;border:1px solid #232a3a;border-radius:8px;padding:14px 16px;margin:12px 0}
+#hashline{word-break:break-all}
+input[type=text]{width:130px}
+</style>
+</head>
+<body>
+<main>
+<h1>Kruskal minimum spanning tree — a sealed, sandbox-verified discovery you can recompute yourself</h1>
+<p class="small">Single-file page. Zero dependencies, zero telemetry, nothing leaves your browser. Runs a discovered algorithm <b>byte-verbatim</b> and cross-checks every result against an independent implementation (Prim's — a different algorithm family).</p>
+
+<h2>1 — Your graph, your answer</h2>
+<p>Undirected weighted graph: <code>n</code> = node count (nodes are 0…n−1), edges as <code>[u, v, weight]</code> arrays, weight ≥ 0. Returns the total weight of a minimum spanning tree.</p>
+<p>
+<select id="preset">
+  <option value="">— preset —</option>
+</select>
+<button id="run">Run both implementations</button>
+</p>
+<textarea id="graph" spellcheck="false"></textarea>
+<p>n = <input type="text" id="nfield" value="4"></p>
+<div id="userout" class="panel"></div>
+
+<h2>2 — The published fixed vectors (10/10)</h2>
+<p>Same two implementations, fixed graphs. This is the reproducible claim a third party can check offline.</p>
+<button id="runvec">Run the 10 vectors</button>
+<div id="vecout" class="panel"></div>
+
+<h2>3 — Provenance of the sealed code</h2>
+<div class="panel">
+<p><b>discovery id</b> <code>gen_kruskal_6cc52bf5</code> — from <code>~/.progsysmcp/discoveries.json</code> (record 83 of 3632), summary: <i>kruskal blended toward quicksort gyroplane at hyperbolic distance 0.876; sandbox passed</i></p>
+<p><b>embedded code size</b> 701 bytes · <b>sha256 computed live in your browser from the bytes below</b>:</p>
+<p id="hashline">…</p>
+<p class="small">This hash is computed by YOUR browser (WebCrypto) from the exact bytes embedded in this page — not pasted from a claim. Compare it with <code>shasum -a 256</code> on the extracted block or on <a href="kruskal_sealed.js">kruskal_sealed.js</a>.</p>
+</div>
+<h2>The sealed code (verbatim)</h2>
+<pre id="codeview">…</pre>
+<p class="small">What you see is <code>document.getElementById('sealed-code').textContent</code> — the literal bytes between the markers in this page's source, untouched.</p>
+
+<h2>4 — Recompute it yourself (no trust required)</h2>
+<div class="panel">
+<pre>curl -o page.html https://pressatojump.github.io/kruskal-recompute/
+shasum -a 256 page.html          # == index.sha256 sidecar in the repo
+# extract the sealed block (between id="sealed-code"&gt; and the next &lt;/script&gt;) and hash it:
+python3 - &lt;&lt;'PY'
+import re,hashlib
+h=open('page.html',encoding='utf-8').read()
+code=re.search(r'id="sealed-code"&gt;(.+?)&lt;/script&gt;',h,re.S).group(1)
+print(hashlib.sha256(code.encode()).hexdigest())
+PY
+node -e 'const s=require("fs").readFileSync("page.html","utf8");const m=s.match(/id="sealed-code"&gt;([\s\S]+?)&lt;\/script&gt;/);const f=(new Function(m[1]+"\n;return kruskal;"))();console.log(f(4,[[0,1,1],[0,2,2],[1,3,4],[2,3,3]]))'   # prints 6</pre>
+<p>Or run the full independent auditor from the repo (Python Prim cross-check + Node re-run of the sealed bytes + wire-byte pin check):</p>
+<pre>git clone https://github.com/pressatojump/kruskal-recompute.git
+cd kruskal-recompute
+python3 auditor.py            # audits the LIVE wire bytes by default</pre>
+</div>
+
+<p class="small">Why this exists: the sealed record was produced by an automated discovery engine (sandbox-verified at seal time), and the claim "this code computes MST weights correctly" is only worth something if a stranger can check it. That's what this page is: your input, the discovered code, an independent cross-check, and a hash you can verify with your own tools. — fold np-20260907_1554-1, 2026-09-07</p>
+
+<script type="text/plain" id="sealed-code">function kruskal(n, edges) {
+  /* AES gyroplane mutating_allocating α=0.068 ||v||=0.2666 */
+  const __alloc = (arguments[0] && arguments[0].slice) ? arguments[0].slice() : [];
+
+  function __rec_axis(i) {
+    if (i >= 9) return;
+    __rec_axis(i + 1);
+  }
+  __rec_axis(0);
+
+  const p = Array.from({ length: n }, function (_, i) { return i; });
+  const find = function (x) { return p[x] === x ? x : (p[x] = find(p[x])); };
+  const sorted = edges.slice().sort(function (a, b) { return a[2] - b[2]; });
+  let weight = 0, used = 0;
+  for (const e of sorted) {
+    const a = find(e[0]), b = find(e[1]);
+    if (a !== b) { p[a] = b; weight += e[2]; used++; if (used === n - 1) break; }
+  }
+  return weight;
+}</script>
+<script type="application/json" id="vectors">[
+ {
+  "name": "textbook4",
+  "n": 4,
+  "edges": [[0,1,1],[0,2,2],[1,3,4],[2,3,3]],
+  "expected": 6
+ },
+ {
+  "name": "triangle",
+  "n": 3,
+  "edges": [[0,1,5],[0,2,1],[1,2,2]],
+  "expected": 3
+ },
+ {
+  "name": "single-node",
+  "n": 1,
+  "edges": [],
+  "expected": 0
+ },
+ {
+  "name": "two-nodes",
+  "n": 2,
+  "edges": [[0,1,7]],
+  "expected": 7
+ },
+ {
+  "name": "parallel-edges",
+  "n": 2,
+  "edges": [[0,1,9],[0,1,3],[0,1,5]],
+  "expected": 3
+ },
+ {
+  "name": "zero-weight",
+  "n": 3,
+  "edges": [[0,1,0],[1,2,0],[0,2,4]],
+  "expected": 0
+ },
+ {
+  "name": "grid-9",
+  "n": 9,
+  "edges": [[0,1,1],[0,3,1],[1,2,1],[1,4,5],[2,5,1],[3,4,1],[3,6,1],[4,5,1],[4,7,1],[5,8,1],[6,7,1],[7,8,1]],
+  "expected": 8
+ },
+ {
+  "name": "hub-and-spoke",
+  "n": 4,
+  "edges": [[0,1,2],[0,2,3],[0,3,1],[1,2,1],[2,3,1]],
+  "expected": 3
+ },
+ {
+  "name": "long-chain",
+  "n": 13,
+  "edges": [[0,1,1],[1,2,2],[2,3,3],[3,4,4],[4,5,5],[5,6,6],[6,7,7],[7,8,1],[8,9,2],[9,10,3],[10,11,4],[11,12,5]],
+  "expected": 43
+ },
+ {
+  "name": "dense-8",
+  "n": 8,
+  "edges": [[0,1,9],[0,2,8],[0,3,7],[0,4,6],[0,5,5],[0,6,4],[0,7,3],[1,2,3],[1,3,2],[1,4,1],[1,5,9],[1,6,8],[1,7,7],[2,3,6],[2,4,5],[2,5,4],[2,6,3],[2,7,2],[3,4,9],[3,5,8],[3,6,7],[3,7,6],[4,5,3],[4,6,2],[4,7,1],[5,6,6],[5,7,5],[6,7,9]],
+  "expected": 14
+ }
+]</script>
+<script>
+"use strict";
+const SEALED_BYTES = document.getElementById('sealed-code').textContent;
+document.getElementById('codeview').textContent = SEALED_BYTES;
+const EXPECT_HASH = "e4cf92636f23e43ba2c770b9ad4a8932300d359f8803a502a038705cabf30a19";
+crypto.subtle.digest('SHA-256', new TextEncoder().encode(SEALED_BYTES)).then(b=>{
+  const hex=[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+  const el=document.getElementById('hashline');
+  el.textContent = hex + "  (expect " + EXPECT_HASH + ")";
+  el.className = hex === EXPECT_HASH ? "ok" : "bad";
+});
+
+// ---- the sealed code runs VERBATIM: only a return hook is appended, bytes untouched
+const kruskal_sealed = (new Function(SEALED_BYTES + "\n;return kruskal;"))();
+
+// ---- independent cross-check: Prim's algorithm, different family, written separately
+function primMST(n, edges){
+  const adj=Array.from({length:n},()=>[]);
+  for(const e of edges){ adj[e[0]].push([e[1],e[2]]); adj[e[1]].push([e[0],e[2]]); }
+  if(n===0) return 0;
+  const inT=new Array(n).fill(false); inT[0]=true; let weight=0;
+  for(let k=1;k<n;k++){
+    let best=null;
+    for(let u=0;u<n;u++){ if(!inT[u])continue; for(const [v,w] of adj[u]){ if(!inT[v] && (best===null||w<best[2])) best=[u,v,w]; } }
+    if(best===null) return null; // disconnected
+    inT[best[1]]=true; weight+=best[2];
+  }
+  return weight;
+}
+function parseInput(txt){
+  const g=JSON.parse(txt);
+  if(!Array.isArray(g)) throw new Error("input must be a JSON array of [u,v,w] edges");
+  for(const e of g){
+    if(!Array.isArray(e)||e.length!==3) throw new Error("edge must be [u, v, weight]: "+JSON.stringify(e));
+    if(!Number.isInteger(e[0])||!Number.isInteger(e[1])) throw new Error("endpoints must be integers: "+JSON.stringify(e));
+    if(typeof e[2]!=="number"||isNaN(e[2])) throw new Error("weight must be a number: "+JSON.stringify(e));
+    if(e[2]<0) throw new Error("weight must be ≥ 0 (MST with negative weights still works, but keep this page's contract simple)");
+  }
+  return g;
+}
+function connected(n, edges){
+  if(n<=1) return true;
+  const adj=Array.from({length:n},()=>[]);
+  for(const e of edges){ adj[e[0]].push(e[1]); adj[e[1]].push(e[0]); }
+  const seen=new Set([0]); const q=[0];
+  while(q.length){ const u=q.pop(); for(const v of adj[u]) if(!seen.has(v)){seen.add(v);q.push(v);} }
+  return seen.size===n;
+}
+
+const VECTORS=JSON.parse(document.getElementById('vectors').textContent);
+const sel=document.getElementById('preset');
+for(const v of VECTORS){ const o=document.createElement('option'); o.value=v.name; o.textContent=v.name; sel.appendChild(o); }
+sel.onchange=()=>{
+  const v=VECTORS.find(x=>x.name===sel.value); if(!v) return;
+  document.getElementById('graph').value=JSON.stringify(v.edges);
+  document.getElementById('nfield').value=v.n;
+};
+document.getElementById('graph').value=JSON.stringify(VECTORS[0].edges);
+document.getElementById('nfield').value=VECTORS[0].n;
+
+document.getElementById('run').onclick=()=>{
+  const out=document.getElementById('userout');
+  try{
+    const edges=parseInput(document.getElementById('graph').value);
+    const n=parseInt(document.getElementById('nfield').value,10);
+    if(!Number.isInteger(n)||n<1) throw new Error("n must be a positive integer");
+    for(const e of edges){ if(e[0]>=n||e[1]>=n||e[0]<0||e[1]<0) throw new Error("endpoint out of range 0…"+(n-1)+": "+JSON.stringify(e)); }
+    const a=kruskal_sealed(n,edges);
+    const b=primMST(n,edges);
+    if(b===null){
+      out.innerHTML='<p><b>n='+n+'</b> · graph is <span class="bad">disconnected</span> — no spanning tree exists. The sealed code returns '+a+' (weight of a spanning forest); Prim\'s returns null by contract.</p>';
+      return;
+    }
+    const ok=a===b;
+    out.innerHTML='<p><b>n='+n+'</b> · sealed Kruskal: <b>'+a+'</b> · independent Prim: <b>'+b+'</b> · '+
+      (ok?'<span class="ok">AGREE</span>':'<span class="bad">DISAGREE</span>')+'</p>';
+  }catch(e){ out.innerHTML='<p class="bad">input error: '+e.message+'</p>'; }
+};
+document.getElementById('runvec').onclick=()=>{
+  let pass=0, lines="";
+  for(const v of VECTORS){
+    const a=kruskal_sealed(v.n,v.edges);
+    const b=primMST(v.n,v.edges);
+    const expOK=(a===v.expected);
+    const ok=(a===b&&a===v.expected); if(ok) pass++;
+    lines+='<tr><td>'+v.name+'</td><td>'+a+'</td><td>'+(b===null?"null":b)+'</td><td>'+v.expected+'</td><td>'+
+      (ok?'<span class="ok">PASS</span>':'<span class="bad">FAIL</span>')+'</td></tr>';
+  }
+  document.getElementById('vecout').innerHTML=
+    '<p>'+pass+'/10 vectors: sealed Kruskal == independent Prim == published expected '+
+    (pass===10?'<span class="ok">10/10 PASS</span>':'<span class="bad">FAILURES PRESENT</span>')+'</p>'+
+    '<table><tr><th>vector</th><th>sealed</th><th>Prim</th><th>expected</th><th>verdict</th></tr>'+lines+'</table>';
+};
+</script>
+</main>
+</body>
+</html>
